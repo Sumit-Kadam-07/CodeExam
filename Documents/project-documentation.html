@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Coding Exam System - Complete Project Documentation</title>
+<style>
+  @page { size: A4; margin: 20mm; }
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #1e1e2e; max-width: 1200px; margin: 0 auto; padding: 40px; background: #fff; }
+  h1 { color: #0d6efd; border-bottom: 3px solid #0d6efd; padding-bottom: 10px; }
+  h2 { color: #6f42c1; border-bottom: 2px solid #6f42c1; padding-bottom: 8px; margin-top: 40px; }
+  h3 { color: #0d6efd; margin-top: 30px; }
+  h4 { color: #6f42c1; margin-top: 20px; }
+  code { background: #f1f3f5; padding: 2px 6px; border-radius: 3px; font-size: 0.9em; }
+  pre { background: #1e1e2e; color: #cdd6f4; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.85em; }
+  .file-path { background: #e8f0fe; padding: 2px 8px; border-radius: 4px; font-family: monospace; font-size: 0.9em; }
+  .section { margin: 30px 0; padding: 20px; border: 1px solid #dee2e6; border-radius: 8px; background: #f8f9fa; }
+  .note { background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 8px; margin: 20px 0; }
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  th, td { border: 1px solid #dee2e6; padding: 10px; text-align: left; }
+  th { background: #0d6efd; color: white; }
+  .toc { background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; }
+  .toc a { color: #0d6efd; text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.8em; font-weight: 600; }
+  .badge-frontend { background: #0d6efd; color: white; }
+  .badge-backend { background: #6f42c1; color: white; }
+  .badge-db { background: #198754; color: white; }
+</style>
+</head>
+<body>
+
+<h1>📘 Smart Coding Exam System — Complete Project Documentation</h1>
+<p><strong>Version:</strong> 1.0.0 | <strong>Stack:</strong> Spring Boot + React + MySQL</p>
+
+<div class="toc">
+<h2>📑 Table of Contents</h2>
+<ol>
+  <li><a href="#overview">Project Overview</a></li>
+  <li><a href="#architecture">Architecture</a></li>
+  <li><a href="#frontend">Frontend (React + Vite + TypeScript)</a>
+    <ol>
+      <li>Entry Point & App Shell</li>
+      <li>Routing & Auth</li>
+      <li>Pages</li>
+      <li>Components</li>
+      <li>Services</li>
+      <li>Types</li>
+      <li>Utility Files</li>
+    </ol>
+  </li>
+  <li><a href="#backend">Backend (Spring Boot + Java)</a>
+    <ol>
+      <li>Entry Point & Config</li>
+      <li>Controllers (API Layer)</li>
+      <li>Services (Business Logic)</li>
+      <li>Models (JPA Entities)</li>
+      <li>DTOs</li>
+      <li>Repositories</li>
+      <li>AI/ML Integration</li>
+      <li>Code Execution</li>
+      <li>Security & JWT</li>
+    </ol>
+  </li>
+  <li><a href="#database">Database Schema (MySQL)</a></li>
+  <li><a href="#flows">Key Workflows</a></li>
+  <li><a href="#setup">Setup & Running</a></li>
+</ol>
+</div>
+
+<!-- ============ OVERVIEW ============ -->
+<h2 id="overview">1. Project Overview</h2>
+<p>The <strong>Smart Coding Exam System</strong> is a full-stack web application for conducting online coding examinations. It allows administrators to create exams with coding questions, and students to attempt them with real-time code execution using the Monaco Editor.</p>
+
+<h3>Key Features</h3>
+<ul>
+  <li><strong>Role-based access:</strong> Admin and Student roles with JWT authentication</li>
+  <li><strong>Exam Management:</strong> Create, edit, publish/unpublish exams</li>
+  <li><strong>Question Management:</strong> Manual, AI-generated, and file-upload question creation</li>
+  <li><strong>Monaco Code Editor:</strong> Industry-standard code editor with syntax highlighting for Java, Python, C, C++</li>
+  <li><strong>AI Question Generation:</strong> Generate questions via Groq (Llama 3.3) or Ollama</li>
+  <li><strong>Code Execution:</strong> Local compiler/interpreter or Judge0 API</li>
+  <li><strong>Auto-grading:</strong> Automated test case evaluation</li>
+  <li><strong>Student Dashboard:</strong> Results, leaderboards, profile management</li>
+  <li><strong>Admin Dashboard:</strong> Analytics, grade submissions, manage students</li>
+</ul>
+
+<h3>Technology Stack</h3>
+<table>
+  <tr><th>Layer</th><th>Technology</th><th>Version</th></tr>
+  <tr><td>Frontend</td><td>React + TypeScript + Vite</td><td>React 19, Vite 7.3</td></tr>
+  <tr><td>Routing</td><td>wouter</td><td>3.10</td></tr>
+  <tr><td>UI</td><td>Bootstrap 5 + Bootstrap Icons</td><td>5.3.2</td></tr>
+  <tr><td>Code Editor</td><td>Monaco Editor (@monaco-editor/react)</td><td>4.7</td></tr>
+  <tr><td>Charts</td><td>Chart.js + react-chartjs-2</td><td>4.5 / 5.3</td></tr>
+  <tr><td>HTTP Client</td><td>Axios</td><td>1.7</td></tr>
+  <tr><td>Backend</td><td>Spring Boot</td><td>3.2.0</td></tr>
+  <tr><td>Database</td><td>MySQL</td><td>8.x</td></tr>
+  <tr><td>ORM</td><td>Hibernate (JPA)</td><td>6.3</td></tr>
+  <tr><td>Security</td><td>Spring Security + JWT</td><td>6.2</td></tr>
+  <tr><td>AI Integration</td><td>Groq API / Ollama</td><td>Custom</td></tr>
+  <tr><td>Code Execution</td><td>Local Compiler or Judge0</td><td>Custom</td></tr>
+</table>
+
+<!-- ============ ARCHITECTURE ============ -->
+<h2 id="architecture">2. Architecture</h2>
+<div class="section">
+<h3>System Architecture Flow</h3>
+<pre>
+┌─────────────────────────────────────────────────────────────────┐
+│                         Browser (User)                          │
+│                   React SPA (Vite Dev Server :5173)              │
+└──────────────────────────┬──────────────────────────────────────┘
+                           │ HTTP / API calls (Vite proxy /api → :5000)
+                           ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Spring Boot Backend (:5000)                    │
+│                                                                   │
+│  ┌──────────────┐  ┌──────────────────┐  ┌────────────────────┐  │
+│  │ Controllers  │→ │    Services      │→ │   Repositories     │  │
+│  │ (API Layer)  │  │ (Business Logic) │  │   (Data Access)    │  │
+│  └──────────────┘  └──────────────────┘  └──────────┬─────────┘  │
+│         │                                            │            │
+│         ▼                                            ▼            │
+│  ┌──────────────┐                          ┌────────────────┐    │
+│  │  AI Client   │                          │    MySQL DB    │    │
+│  │ (Groq/Ollama)│                          │  smart_coding_ │    │
+│  └──────────────┘                          │    exam        │    │
+│                                            └────────────────┘    │
+│  ┌───────────────────────────────────────────────────────────────┐│
+│  │  Code Execution: Local Compiler (Java/Python/C/C++)          ││
+│  │                 OR Judge0 API (cloud)                         ││
+│  └───────────────────────────────────────────────────────────────┘│
+└───────────────────────────────────────────────────────────────────┘
+</pre>
+</div>
+
+<!-- ============ FRONTEND ============ -->
+<h2 id="frontend">3. Frontend (React + Vite + TypeScript)</h2>
+<p><strong>Directory:</strong> <code>frontend/frontend/</code></p>
+
+<h3>3.1 Entry Point & App Shell</h3>
+
+<h4>index.html</h4>
+<p class="file-path">frontend/frontend/index.html</p>
+<p>The HTML entry point. Loads Bootstrap 5 CSS/JS from CDN, Bootstrap Icons, and mounts the React app at <code><div id="root"></code>. The script <code>/src/main.tsx</code> bootstraps the React application.</p>
+
+<h4>main.tsx</h4>
+<p class="file-path">frontend/frontend/src/main.tsx</p>
+<p>Uses <code>ReactDOM.createRoot</code> to render the <code><App /></code> component wrapped in <code>StrictMode</code>. Imports global CSS.</p>
+
+<h4>App.tsx</h4>
+<p class="file-path">frontend/frontend/src/App.tsx</p>
+<p>Core routing component. Uses <strong>wouter</strong> (lightweight React router) with <code>Switch</code> and <code>Route</code>. All pages are lazy-loaded with <code>React.lazy()</code> and wrapped in <code>Suspense</code> with a spinner fallback. The <code>AuthProvider</code> context wraps the entire app. Routes are organized by:</p>
+<ul>
+  <li><strong>Public:</strong> Home (/), Login (/login), Register (/register)</li>
+  <li><strong>Admin:</strong> /admin/dashboard, /admin/manage-exams, /admin/exam/add, /admin/exam/edit/:id, /admin/exam/:id/question/add, etc.</li>
+  <li><strong>Student:</strong> /student/dashboard, /exam/:id, /student/my-results, /student/profile, etc.</li>
+</ul>
+<p>Protected routes enforce role-based access (<code>ProtectedRoute</code> component).</p>
+
+<h3>3.2 Routing & Auth</h3>
+
+<h4>ProtectedRoute.tsx</h4>
+<p class="file-path">frontend/frontend/src/components/auth/ProtectedRoute.tsx</p>
+<p>Route guard component. Checks if user is authenticated via <code>AuthContext</code>. If not initialized, renders nothing. If not logged in, redirects to login. If user role doesn't match allowed roles, redirects to home. Otherwise renders children.</p>
+
+<h4>AuthContext.tsx</h4>
+<p class="file-path">frontend/frontend/src/context/AuthContext.tsx</p>
+<p>Global authentication state using React Context. Provides:</p>
+<ul>
+  <li><code>user</code> — Current user object (username, fullName, role, profilePicUrl)</li>
+  <li><code>login(user)</code> — Sets user state</li>
+  <li><code>logout()</code> — Clears tokens and user data from localStorage</li>
+  <li><code>updateUser(updates)</code> — Partial updates to user state</li>
+  <li><code>initialized</code> — Boolean flag indicating auth state is loaded</li>
+</ul>
+<p>On mount, checks for existing JWT token. If found, calls <code>/auth/me</code> to validate. If not, attempts to restore user from localStorage.</p>
+
+<h3>3.3 Pages</h3>
+
+<h4>HomePage</h4>
+<p class="file-path">src/pages/HomePage.tsx</p>
+<p>Landing page with gradient hero section, feature cards (Timed Exams, Monaco Editor, Analytics), and login/register CTA buttons.</p>
+
+<h4>LoginPage</h4>
+<p class="file-path">src/pages/auth/LoginPage.tsx</p>
+<p>Login form with username/email, password, and remember me. Uses <code>authService.login()</code>. On success, stores JWT token and user data, then redirects to appropriate dashboard based on role.</p>
+
+<h4>RegisterPage</h4>
+<p class="file-path">src/pages/auth/RegisterPage.tsx</p>
+<p>Registration form with username, full name, password, and confirm password. Uses <code>authService.register()</code>.</p>
+
+<h4>Admin Pages</h4>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>AdminDashboard.tsx</td><td>Stats cards (students, exams, questions, submissions) + Chart.js bar chart + Recent results table</td></tr>
+  <tr><td>ManageExams.tsx</td><td>List all exams, create/edit/delete/publish/unpublish actions</td></tr>
+  <tr><td>AddExam.tsx</td><td>Form to create new exam (title, description, duration, schedule)</td></tr>
+  <tr><td>EditExam.tsx</td><td>Form to edit existing exam</td></tr>
+  <tr><td>ManageQuestions.tsx</td><td>List questions for an exam, reorder, delete</td></tr>
+  <tr><td>AddQuestion.tsx</td><td><strong>Central question creation hub</strong> with 3 tabs: Manual, AI Generate, Upload File</td></tr>
+  <tr><td>EditQuestion.tsx</td><td>Edit existing question with test cases</td></tr>
+  <tr><td>ManageStudents.tsx</td><td>List students, reset passwords, delete accounts</td></tr>
+  <tr><td>ViewResults.tsx</td><td>View exam results with score breakdowns</td></tr>
+  <tr><td>GradeSubmission.tsx</td><td>Manual grading of student submissions with code review</td></tr>
+  <tr><td>LeaderboardExam.tsx</td><td>Per-exam leaderboard with Chart.js</td></tr>
+  <tr><td>LeaderboardGlobal.tsx</td><td>Global leaderboard across all exams</td></tr>
+</table>
+
+<h4>Student Pages</h4>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>StudentDashboard.tsx</td><td>Upcoming exams, recent results, performance chart</td></tr>
+  <tr><td>ExamPage.tsx</td><td><strong>Core exam-taking interface</strong> — Monaco Editor, timer, question navigation, code submission</td></tr>
+  <tr><td>MyResults.tsx</td><td>List of all exam results with scores</td></tr>
+  <tr><td>ResultDetail.tsx</td><td>Detailed result with per-question breakdown and code review</td></tr>
+  <tr><td>ReviewExam.tsx</td><td>Review submitted exam with code and test case results</td></tr>
+  <tr><td>ResultConfirmation.tsx</td><td>Post-submission confirmation screen with score summary</td></tr>
+  <tr><td>Profile.tsx</td><td>User profile editor with picture upload, password change</td></tr>
+  <tr><td>Leaderboard.tsx</td><td>Per-exam leaderboard for students</td></tr>
+</table>
+
+<h3>3.4 Components</h3>
+
+<h4>Add Question Components</h4>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>ManualQuestionTab.tsx</td><td>Wrapper for QuestionForm component</td></tr>
+  <tr><td>QuestionForm.tsx</td><td>Complete question form with title, difficulty, marks, language selector, Monaco Editor for starter code, problem statement, advanced fields toggling, test case editor, and submit button</td></tr>
+  <tr><td>MonacoCodeEditor.tsx</td><td>Wrapper around @monaco-editor/react with language-specific syntax highlighting. Uses <code>key</code> prop to force re-mount on language change for proper syntax display</td></tr>
+  <tr><td>AdvancedFields.tsx</td><td>Collapsible section with input format, output format, constraints, sample input/output, explanation, expected solution fields</td></tr>
+  <tr><td>TestCaseEditor.tsx</td><td>Dynamic test case table with add/remove rows, input, expected output, weight, and sample toggle</td></tr>
+  <tr><td>AiGenerateTab.tsx</td><td>AI generation form with topic, language, difficulty, marks. Calls <code>aiService.generateAiQuestion()</code> and returns result via <code>onGenerated</code> callback</td></tr>
+  <tr><td>UploadQuestionTab.tsx</td><td>File upload with drag-and-drop, file type validation, progress indicator. Calls <code>uploadService.uploadAndGenerate()</code> with examId to save questions directly to backend</td></tr>
+  <tr><td>ExistingQuestions.tsx</td><td>Sidebar listing existing questions for the exam</td></tr>
+</table>
+
+<h4>UI Components</h4>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>Button.tsx</td><td>Reusable button with variants (primary, secondary, danger, success, outline, ghost)</td></tr>
+  <tr><td>Card.tsx</td><td>Reusable card with CardHeader, CardBody, CardFooter sub-components</td></tr>
+  <tr><td>Input.tsx</td><td>Form input with label, error message, and icon support</td></tr>
+  <tr><td>Modal.tsx</td><td>Bootstrap modal wrapper with header, body, footer sections</td></tr>
+  <tr><td>Table.tsx</td><td>Reusable table with TableHead, TableBody, TableRow, TableHeader, TableCell</td></tr>
+  <tr><td>Loader.tsx</td><td>Loading spinner component</td></tr>
+  <tr><td>EmptyState.tsx</td><td>Empty state placeholder with icon and message</td></tr>
+  <tr><td>Navbar.tsx</td><td>Top navigation bar with role-based links, user dropdown with profile pic and logout</td></tr>
+</table>
+
+<h3>3.5 Services</h3>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>axios.ts</td><td>Axios instance creation with base URL from env or <code>/api</code></td></tr>
+  <tr><td>interceptors.ts</td><td>Request interceptor adds JWT token to headers. Response interceptor handles 401 redirect to login</td></tr>
+  <tr><td>api.ts</td><td>Generic HTTP helper functions (get, post, put, del) using the axios instance</td></tr>
+  <tr><td>authService.ts</td><td>Login, register, and get current user API calls</td></tr>
+  <tr><td>adminService.ts</td><td>Admin APIs: dashboard, exams CRUD, questions CRUD, students, results, grading, leaderboard</td></tr>
+  <tr><td>studentService.ts</td><td>Student APIs: dashboard, profile, results, leaderboard</td></tr>
+  <tr><td>examService.ts</td><td>Exam-taking APIs: get questions, run code, submit exam</td></tr>
+  <tr><td>questionService.ts</td><td>Question CRUD APIs</td></tr>
+  <tr><td>aiService.ts</td><td>AI question generation API</td></tr>
+  <tr><td>uploadService.ts</td><td>File upload with question generation API</td></tr>
+</table>
+
+<h3>3.6 Types</h3>
+<table>
+  <tr><th>File</th><th>Key Interfaces</th></tr>
+  <tr><td>index.ts</td><td>ApiResponse, ExamDTO, QuestionDTO, UserDTO, ResultDTO, CodeSubmissionDTO, etc.</td></tr>
+  <tr><td>ai.ts</td><td>AiGenerateRequest, AiGenerateResponse (with testCases, difficulty, marks, language fields), AiGenerateResult</td></tr>
+  <tr><td>question.ts</td><td>QuestionFormState, TestCaseItem, DEFAULT_QUESTION_FORM, DEFAULT_TEST_CASES</td></tr>
+  <tr><td>upload.ts</td><td>UploadQuestionResult with savedCount, questionIds, failedCount, errors</td></tr>
+</table>
+
+<h3>3.7 Utility Files</h3>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>boilerplates.ts</td><td>Language boilerplate code templates (Java, Python, C, C++) and <code>getMonacoLanguage()</code> mapper</td></tr>
+  <tr><td>validators.ts</td><td>Test case validation functions</td></tr>
+  <tr><td>useFetch.ts</td><td>Custom React hook for API data fetching with loading/error states</td></tr>
+  <tr><td>index.css</td><td>Global styles (body background, dashed border utility)</td></tr>
+</table>
+
+<!-- ============ BACKEND ============ -->
+<h2 id="backend">4. Backend (Spring Boot + Java)</h2>
+<p><strong>Directory:</strong> <code>backend/src/main/java/com/example/exam/</code></p>
+
+<h3>4.1 Entry Point</h3>
+<h4>OnlineExamApplication.java</h4>
+<p>Standard Spring Boot application entry point with <code>@SpringBootApplication</code>.</p>
+
+<h3>4.2 Configuration</h3>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>SecurityConfig.java</td><td>Spring Security setup: CORS (localhost:5173/5174/3000), CSRF disabled, stateless sessions, JWT filter, role-based endpoint authorization (permitAll for /api/auth/**, hasRole ADMIN for /api/admin/**, hasAnyRole STUDENT/ADMIN for /api/student/**, authenticated for /api/exam/** and /api/code/**)</td></tr>
+  <tr><td>AdminInitializer.java</td><td>On startup, creates a default admin user if not exists</td></tr>
+  <tr><td>AiQuestionProperties.java</td><td>Configuration properties for AI provider (provider, api-url, api-key, model)</td></tr>
+  <tr><td>MvcConfig.java</td><td>Web MVC configuration</td></tr>
+</table>
+
+<h4>JWT Configuration</h4>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>JwtTokenProvider.java</td><td>JWT token generation, validation, and username extraction using secret key from config</td></tr>
+  <tr><td>JwtAuthenticationFilter.java</td><td>OncePerRequestFilter that extracts JWT from Authorization header, validates, and sets SecurityContext</td></tr>
+  <tr><td>JwtAuthenticationEntryPoint.java</td><td>Returns 401 for unauthenticated requests</td></tr>
+</table>
+
+<h3>4.3 Controllers (API Layer)</h3>
+<table>
+  <tr><th>File</th><th>Base Path</th><th>Key Endpoints</th></tr>
+  <tr><td>AuthApiController.java</td><td>/api/auth</td><td>POST /login, POST /register, GET /me</td></tr>
+  <tr><td>AdminApiController.java</td><td>/api/admin</td><td>GET /dashboard, GET /exams, POST /exam, PUT /exam/:id, POST /exam/:id/question, DELETE /exam/:id, POST /exam/:id/publish, POST /exam/:id/unpublish, GET /exam/:id/questions, PUT /question/:id, DELETE /question/:id, GET /students, POST /student/:id/reset-password, DELETE /student/:id, GET /results/:id, POST /results/:id/grade, GET /leaderboard/:id, GET /leaderboard/global</td></tr>
+  <tr><td>AiQuestionController.java</td><td>/api/ai</td><td>POST /generate — AI question generation</td></tr>
+  <tr><td>FileUploadController.java</td><td>/api/ai</td><td>POST /upload — Upload file, extract text, AI generates multiple questions, saves each to DB with examId</td></tr>
+  <tr><td>StudentApiController.java</td><td>/api/student</td><td>GET /dashboard, GET /exams, GET /exam/:id, GET /results, GET /result/:id, GET /profile, PUT /profile, POST /change-password, POST /upload-picture, GET /leaderboard/:id</td></tr>
+  <tr><td>ExamApiController.java</td><td>/api/exam</td><td>GET /:id/questions, POST /:id/submit, GET /results/:id</td></tr>
+  <tr><td>CodeExecutionController.java</td><td>/api/code</td><td>POST /run, POST /compile</td></tr>
+  <tr><td>ActivityLogApiController.java</td><td>/api/activity</td><td>GET /logs, POST /log</td></tr>
+</table>
+
+<h3>4.4 Services (Business Logic)</h3>
+<table>
+  <tr><th>File</th><th>Key Responsibilities</th></tr>
+  <tr><td>AdminService.java</td><td>Dashboard stats, exam CRUD, question CRUD with test cases, publish/unpublish with validation, student management, grading, results. Contains inner classes: DashboardData, PublishOutcome, QuestionCreationOutcome, AdminResultsData, GradingPageData, DeleteQuestionOutcome, DeleteStudentOutcome, SaveGradesOutcome</td></tr>
+  <tr><td>AuthService.java</td><td>User authentication, registration, token generation</td></tr>
+  <tr><td>AiQuestionService.java</td><td>AI question generation: builds prompt, calls AI client, parses JSON response. Supports single question and multi-question parsing (for file upload). <code>generateMultipleQuestions()</code> returns List<AiGenerateResponse></td></tr>
+  <tr><td>ExamService.java</td><td>Exam-taking logic: get questions, submit exam, calculate scores</td></tr>
+  <tr><td>StudentService.java</td><td>Student dashboard, profile management, results, leaderboard</td></tr>
+  <tr><td>CodeExecutionService.java</td><td>Code execution orchestration (local or Judge0)</td></tr>
+  <tr><td>CodingEvaluationService.java</td><td>Test case evaluation against submitted code</td></tr>
+  <tr><td>LeaderboardService.java</td><td>Leaderboard calculations</td></tr>
+  <tr><td>FileExtractionService.java</td><td>Text extraction from uploaded files (PDF, DOCX, TXT, images)</td></tr>
+  <tr><td>FileStorageService.java</td><td>File storage on disk</td></tr>
+  <tr><td>UserService.java / UserServiceImpl.java</td><td>User CRUD operations</td></tr>
+  <tr><td>CustomUserDetailsService.java</td><td>Spring Security UserDetailsService implementation</td></tr>
+  <tr><td>ActivityLogService.java</td><td>Activity logging for audit trail</td></tr>
+</table>
+
+<h3>4.5 Models (JPA Entities)</h3>
+<table>
+  <tr><th>Entity</th><th>Table</th><th>Key Fields</th></tr>
+  <tr><td>User.java</td><td>users</td><td>id, username, password (hash), email, fullName, role, profilePicUrl, mobileNumber</td></tr>
+  <tr><td>Exam.java</td><td>exams</td><td>id, title, description, durationInMinutes, totalMarks, published, maxViolations, startsAt, endsAt, createdBy (FK→User), createdAt</td></tr>
+  <tr><td>Question.java</td><td>questions</td><td>id, title, problemStatement, inputFormat, outputFormat, constraints, sampleInput, sampleOutput, explanation, expectedSolution, marks, difficulty, language, starterCode, executionTimeout, memoryLimit, exam (FK→Exam), testCases (OneToMany)</td></tr>
+  <tr><td>TestCase.java</td><td>test_cases</td><td>id, inputData, expectedOutput, weight, sample, sequenceNo, question (FK→Question)</td></tr>
+  <tr><td>CodingSubmission.java</td><td>coding_submissions</td><td>id, sourceCode, language, status, marksAwarded, adminRemarks, reviewed, submittedAt, exam, question, student, examResult</td></tr>
+  <tr><td>ExamResult.java</td><td>exam_results</td><td>id, totalScore, percentage, pass, startedAt, finishedAt, exam, student, codingSubmissions</td></tr>
+  <tr><td>ActivityLog.java</td><td>activity_logs</td><td>id, action, details, timestamp, user, exam</td></tr>
+</table>
+
+<h3>4.6 DTOs</h3>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>AiGenerateRequest.java</td><td>Request: topic, language, difficulty, marks</td></tr>
+  <tr><td>AiGenerateResponse.java</td><td>Response: title, problemStatement, inputFormat, outputFormat, constraints, sampleInput, sampleOutput, explanation, starterCode, expectedSolution, difficulty, marks, testCases list</td></tr>
+  <tr><td>LoginRequest.java / LoginResponse.java</td><td>Authentication DTOs</td></tr>
+  <tr><td>RegisterRequest.java</td><td>Registration DTO</td></tr>
+  <tr><td>ExamDTO.java / QuestionDTO.java / TestCaseDTO.java</td><td>Data transfer objects for exams, questions, test cases</td></tr>
+  <tr><td>ResultDTO.java / CodeSubmissionDTO.java</td><td>Results and submission DTOs</td></tr>
+  <tr><td>UserDTO.java</td><td>User data transfer object</td></tr>
+  <tr><td>CodeRunRequest.java / CodeCompileRequest.java / CodeExecutionResponse.java</td><td>Code execution DTOs</td></tr>
+  <tr><td>LeaderboardEntry.java / GlobalLeaderboardEntry.java</td><td>Leaderboard DTOs</td></tr>
+  <tr><td>UploadQuestionResponse.java</td><td>Upload response with savedCount, questionIds, failedCount, errors</td></tr>
+  <tr><td>ApiResponse.java</td><td>Generic API response wrapper</td></tr>
+</table>
+
+<h3>4.7 Repositories</h3>
+<p>Spring Data JPA repositories for each entity:</p>
+<ul>
+  <li>UserRepository — <code>findByUsername()</code>, <code>countByRole()</code>, <code>findByRole()</code></li>
+  <li>ExamRepository — <code>getExamSubmissionCounts()</code></li>
+  <li>QuestionRepository — standard CRUD</li>
+  <li>TestCaseRepository — standard CRUD</li>
+  <li>CodingSubmissionRepository — <code>findByExam()</code>, <code>findByQuestion()</code>, <code>findByStudent()</code>, <code>findByExamResult()</code></li>
+  <li>ExamResultRepository — <code>findByExamWithSubmissions()</code>, <code>findTop5ByOrderBySubmissionTimeDesc()</code></li>
+  <li>ActivityLogRepository</li>
+</table>
+
+<h3>4.8 AI Integration</h3>
+<table>
+  <tr><th>Component</th><th>Purpose</th></tr>
+  <tr><td>AiClient.java</td><td>HTTP client for AI providers. Supports Ollama (local) and OpenAI-compatible APIs (Groq). Handles API calls with configurable timeout, JSON request/response parsing</td></tr>
+  <tr><td>PromptBuilder.java</td><td>Builds structured prompts for AI. Two prompt types: <code>buildQuestionPrompt()</code> for single question generation, <code>buildMultiQuestionPrompt()</code> for parsing multiple questions from uploaded file content. Both instruct AI to return valid JSON only</td></tr>
+  <tr><td>AiQuestionService.java</td><td>Orchestrates AI question generation. Parses JSON responses from AI. Handles both single-object and array responses. Validates and filters out invalid question entries</td></tr>
+</table>
+
+<h3>4.9 Code Execution</h3>
+<table>
+  <tr><th>Component</th><th>Purpose</th></tr>
+  <tr><td>ExecutionProvider.java</td><td>Interface for code execution providers</td></tr>
+  <tr><td>LocalCompilerProvider.java</td><td>Executes code locally using system compilers (javac, gcc, g++, python3)</td></tr>
+  <tr><td>Judge0Provider.java / Judge0ClientService.java</td><td>Cloud-based code execution via Judge0 API</td></tr>
+  <tr><td>Judge0Properties.java</td><td>Judge0 configuration (URL, API key, timeouts)</td></tr>
+  <tr><td>ProviderResult.java</td><td>Execution result wrapper</td></tr>
+</table>
+
+<h3>4.10 Utility Classes</h3>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>DocxParser.java</td><td>Parse .docx files</td></tr>
+  <tr><td>PdfParser.java</td><td>Parse .pdf files</td></tr>
+  <tr><td>ImageTextExtractor.java</td><td>OCR for images</td></tr>
+  <tr><td>ProcessExecutionUtils.java</td><td>OS process execution utilities</td></tr>
+  <tr><td>SourceCodeUtils.java</td><td>Source code analysis utilities</td></tr>
+  <tr><td>SecurityUtils.java</td><td>Current user/authentication utilities</td></tr>
+</table>
+
+<!-- ============ DATABASE ============ -->
+<h2 id="database">5. Database Schema (MySQL)</h2>
+<p><strong>Database:</strong> <code>smart_coding_exam</code> | <strong>Charset:</strong> utf8mb4</p>
+
+<h3>Tables</h3>
+
+<h4>users</h4>
+<pre>CREATE TABLE users (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(50) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL,
+  role VARCHAR(20) NOT NULL,           -- ROLE_ADMIN / ROLE_STUDENT
+  full_name VARCHAR(120) NOT NULL,
+  email VARCHAR(120),
+  mobile VARCHAR(20),
+  profile_picture_url VARCHAR(500),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB;</pre>
+
+<h4>exams</h4>
+<pre>CREATE TABLE exams (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  created_by_user_id BIGINT NOT NULL,
+  title VARCHAR(200) NOT NULL,
+  description TEXT,
+  duration_minutes INT NOT NULL,
+  is_published BOOLEAN DEFAULT TRUE,
+  starts_at DATETIME,
+  ends_at DATETIME,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (created_by_user_id) REFERENCES users(id)
+) ENGINE=InnoDB;</pre>
+
+<h4>questions</h4>
+<pre>CREATE TABLE questions (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  exam_id BIGINT NOT NULL,
+  title VARCHAR(200) NOT NULL,
+  problem_statement TEXT NOT NULL,
+  input_format MEDIUMTEXT,
+  output_format MEDIUMTEXT,
+  constraints MEDIUMTEXT,
+  sample_input MEDIUMTEXT,
+  sample_output MEDIUMTEXT,
+  explanation MEDIUMTEXT,
+  expected_solution TEXT,
+  marks INT NOT NULL DEFAULT 10,
+  difficulty VARCHAR(20),
+  language VARCHAR(20) DEFAULT 'Java',
+  starter_code TEXT,
+  execution_timeout INT DEFAULT 5000,
+  memory_limit INT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE
+) ENGINE=InnoDB;</pre>
+
+<h4>test_cases</h4>
+<pre>CREATE TABLE test_cases (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  question_id BIGINT NOT NULL,
+  input_data MEDIUMTEXT NOT NULL,
+  expected_output MEDIUMTEXT NOT NULL,
+  weight INT DEFAULT 1,
+  sample BOOLEAN DEFAULT FALSE,
+  sequence_no INT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE,
+  UNIQUE KEY (question_id, sequence_no)
+) ENGINE=InnoDB;</pre>
+
+<h4>coding_submissions</h4>
+<pre>CREATE TABLE coding_submissions (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  exam_id BIGINT NOT NULL,
+  question_id BIGINT NOT NULL,
+  student_id BIGINT NOT NULL,
+  attempt_no INT DEFAULT 1,
+  language VARCHAR(30) NOT NULL,
+  source_code MEDIUMTEXT NOT NULL,
+  marks_awarded INT DEFAULT 0,
+  admin_remarks TEXT,
+  reviewed BOOLEAN DEFAULT FALSE,
+  status VARCHAR(20) DEFAULT 'SUBMITTED',
+  submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE,
+  FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE,
+  FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+  UNIQUE KEY (exam_id, question_id, student_id, attempt_no)
+) ENGINE=InnoDB;</pre>
+
+<h4>exam_results</h4>
+<pre>CREATE TABLE exam_results (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  exam_id BIGINT NOT NULL,
+  student_id BIGINT NOT NULL,
+  attempt_no INT DEFAULT 1,
+  total_score INT NOT NULL,
+  percentage DECIMAL(6,2) NOT NULL,
+  is_pass BOOLEAN DEFAULT FALSE,
+  started_at DATETIME,
+  finished_at DATETIME,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE,
+  FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+  UNIQUE KEY (exam_id, student_id, attempt_no)
+) ENGINE=InnoDB;</pre>
+
+<h4>evaluation_results</h4>
+<pre>CREATE TABLE evaluation_results (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  submission_id BIGINT NOT NULL,
+  test_case_id BIGINT NOT NULL,
+  pass BOOLEAN NOT NULL,
+  actual_output MEDIUMTEXT,
+  expected_output MEDIUMTEXT,
+  execution_time_ms INT NOT NULL,
+  error_message TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (submission_id) REFERENCES coding_submissions(id) ON DELETE CASCADE,
+  FOREIGN KEY (test_case_id) REFERENCES test_cases(id) ON DELETE RESTRICT,
+  UNIQUE KEY (submission_id, test_case_id)
+) ENGINE=InnoDB;</pre>
+
+<h4>attendance</h4>
+<pre>CREATE TABLE attendance (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  exam_id BIGINT NOT NULL,
+  student_id BIGINT NOT NULL,
+  status VARCHAR(20) DEFAULT 'NOT_STARTED',
+  last_active_at DATETIME,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE,
+  FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+  UNIQUE KEY (exam_id, student_id)
+) ENGINE=InnoDB;</pre>
+
+<h4>activity_logs</h4>
+<pre>CREATE TABLE activity_logs (
+  id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  user_id BIGINT,
+  exam_id BIGINT,
+  action VARCHAR(255) NOT NULL,
+  details TEXT,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+  FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE SET NULL
+) ENGINE=InnoDB;</pre>
+
+<h3>Entity Relationship Diagram</h3>
+<pre>
+users ──┬── exams (created_by)
+        │
+        └── exam_results (student)
+        │
+        └── coding_submissions (student)
+        │
+        └── attendance (student)
+        │
+        └── activity_logs (user)
+
+exams ──┬── questions (exam)
+        │
+        ├── exam_results (exam)
+        │
+        ├── coding_submissions (exam)
+        │
+        └── attendance (exam)
+
+questions ──┬── test_cases (question)
+            │
+            └── coding_submissions (question)
+
+coding_submissions ──┬── evaluation_results (submission)
+                     │
+                     └── exam_results (exam_result)
+
+test_cases ──┬── evaluation_results (test_case)
+</pre>
+
+<!-- ============ KEY WORKFLOWS ============ -->
+<h2 id="flows">6. Key Workflows</h2>
+
+<h3>6.1 Authentication Flow</h3>
+<ol>
+  <li>User enters credentials on LoginPage → POST /api/auth/login</li>
+  <li>Backend validates credentials, returns JWT token + user data</li>
+  <li>Frontend stores token in localStorage, user data in AuthContext</li>
+  <li>Subsequent API calls include Authorization: Bearer <token> header</li>
+  <li>JwtAuthenticationFilter validates token on every request</li>
+  <li>ProtectedRoute checks auth state before rendering protected pages</li>
+</ol>
+
+<h3>6.2 AI Question Generation Flow</h3>
+<ol>
+  <li>Admin enters topic, language, difficulty, marks → AiGenerateTab</li>
+  <li>POST /api/ai/generate → AiQuestionController</li>
+  <li>AiQuestionService.buildQuestionPrompt() creates structured JSON prompt</li>
+  <li>AiClient.callApi() sends prompt to Groq/Ollama</li>
+  <li>AI returns JSON response parsed into AiGenerateResponse</li>
+  <li>Frontend populates QuestionForm with AI-generated data</li>
+  <li>Admin reviews and clicks "Save Question" → POST /api/admin/exam/:id/question</li>
+  <li>AdminService.addQuestionWithArrays() validates and saves question + test cases to DB</li>
+</ol>
+
+<h3>6.3 File Upload Multiple Questions Flow</h3>
+<ol>
+  <li>Admin uploads a file (PDF/DOCX/TXT) containing 5 questions</li>
+  <li>POST /api/ai/upload?examId=X → FileUploadController</li>
+  <li>FileExtractionService.extractText() extracts text from file</li>
+  <li>AiQuestionService.generateMultipleQuestions() builds multi-question prompt and calls AI</li>
+  <li>AI returns JSON array of AiGenerateResponse objects</li>
+  <li>Controller iterates over each question, validates, and saves via AdminService.addQuestionWithArrays()</li>
+  <li>Returns response with savedCount, questionIds, failedCount, errors</li>
+  <li>UploadQuestionTab shows success/error counts to admin</li>
+</ol>
+
+<h3>6.4 Exam Taking Flow</h3>
+<ol>
+  <li>Student views available exams on StudentDashboard</li>
+  <li>Clicks exam → GET /api/student/exam/:id → loads questions</li>
+  <li>ExamPage shows Monaco Editor for each question with timer</li>
+  <li>Student writes code, can run/test via POST /api/code/run</li>
+  <li>On submit → POST /api/exam/:id/submit → saves code + evaluates test cases</li>
+  <li>ExamService calculates score, creates ExamResult</li>
+  <li>Student redirected to ResultConfirmation</li>
+</ol>
+
+<h3>6.5 Grading Flow</h3>
+<ol>
+  <li>Admin views exam results → GET /api/admin/results/:id</li>
+  <li>Clicks "Grade" → GradeSubmission page shows code + test case results</li>
+  <li>Admin reviews code, enters marks per question, adds remarks</li>
+  <li>POST /api/admin/results/:id/grade saves marks, updates status</li>
+</ol>
+
+<!-- ============ SETUP ============ -->
+<h2 id="setup">7. Setup & Running</h2>
+
+<h3>Prerequisites</h3>
+<ul>
+  <li>Node.js 18+</li>
+  <li>Java 17+ (Maven wrapper included)</li>
+  <li>MySQL 8+</li>
+  <li>For local code execution: JDK, Python, GCC/G++ installed</li>
+  <li>For AI: Groq API key (free) or Ollama running locally</li>
+</ul>
+
+<h3>Database Setup</h3>
+<pre>mysql -u root -p < database/schema_mysql.sql
+mysql -u root -p smart_coding_exam < database/clean_data.sql</pre>
+
+<h3>Backend Setup</h3>
+<pre>cd backend
+# Configure application.properties:
+#   - MySQL credentials
+#   - AI provider (Groq/Ollama) with API key
+#   - JWT secret
+./mvnw spring-boot:run</pre>
+
+<h3>Frontend Setup</h3>
+<pre>cd frontend/frontend
+npm install
+npm run dev</pre>
+
+<h3>Access</h3>
+<ul>
+  <li>Frontend: <code>http://localhost:5173</code></li>
+  <li>Backend: <code>http://localhost:5000</code></li>
+  <li>Default admin: username <code>admin</code>, password from DB</li>
+</ul>
+
+<h3>Environment Variables</h3>
+<table>
+  <tr><th>Variable</th><th>Default</th><th>Description</th></tr>
+  <tr><td>MYSQL_URL</td><td>jdbc:mysql://localhost:3306/smart_coding_exam</td><td>Database URL</td></tr>
+  <tr><td>MYSQL_USER</td><td>root</td><td>Database user</td></tr>
+  <tr><td>MYSQL_PASSWORD</td><td>—</td><td>Database password</td></tr>
+  <tr><td>JWT_SECRET</td><td>Base64 secret</td><td>JWT signing key</td></tr>
+  <tr><td>AI_PROVIDER</td><td>openai</td><td>AI provider (openai/ollama)</td></tr>
+  <tr><td>AI_API_URL</td><td>https://api.groq.com/openai/v1/chat/completions</td><td>AI API endpoint</td></tr>
+  <tr><td>AI_API_KEY</td><td>—</td><td>AI API key (Groq)</td></tr>
+  <tr><td>AI_MODEL</td><td>llama-3.3-70b-versatile</td><td>AI model name</td></tr>
+</table>
+
+<div class="note">
+<p><strong>📝 Note:</strong> This documentation covers all files and their purposes in the Smart Coding Exam System. The project follows a clean architecture pattern with separation of concerns: Controllers (API) → Services (Business Logic) → Repositories (Data Access) → Database.</p>
+</div>
+
+<hr>
+<p style="text-align: center;"><em>Generated on: August 2026 | Smart Coding Exam System v1.0.0</em></p>
+
+</body>
+</html>

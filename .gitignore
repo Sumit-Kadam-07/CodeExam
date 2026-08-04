@@ -1,0 +1,38 @@
+# Build artifacts
+target/
+dist/
+build/
+
+# Logs
+*.log
+backend_check.log
+backend_check_err.log
+
+# Maven
+apache-maven-*/
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.vscode/
+.idea/
+*.iml
+*.class
+
+# Uploads
+uploads/
+
+# Secrets / credentials
+admin_initial_password.txt
+cp.txt
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Database dumps
+*.sql.bak

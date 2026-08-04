@@ -1,0 +1,444 @@
+I now have a comprehensive view of the entire project. Let me provide the complete technology stack analysis.
+
+🧩 Technology Stack — Smart Coding Exam System
+Here's a breakdown of all technologies used across the four layers:
+
+🎨 Frontend Stack
+Category	Technology	Details
+Framework	React 19.1	Latest React with hooks, lazy loading, Suspense
+Language	TypeScript ~5.9	Fully typed frontend
+Build Tool	Vite 7.3	Fast dev server & bundler
+Routing	wouter 3.3	Lightweight hash-based routing
+HTTP Client	axios 1.7	API requests to backend
+UI Library	Bootstrap 5.3 (CDN)	CSS framework via CDN (bootstrap.min.css, bootstrap.bundle.min.js)
+Icons	Bootstrap Icons (CDN)	Icon set
+Code Editor	Monaco Editor (@monaco-editor/react 4.7)	VS Code-powered code editor in browser
+Charts	Chart.js 4.5 + react-chartjs-2 5.3	Result visualization
+Code Quality	Prettier 3.9	Code formatting
+Formatting	Vite plugin (@vitejs/plugin-react 5.0)	React Fast Refresh
+
+⚙️ Backend Stack
+Category	Technology	Details
+Runtime	Java 17	Latest LTS
+Framework	Spring Boot 3.2	REST API, DI, Security, JPA
+Build Tool	Maven (with mvnw wrapper)	Dependency management
+Security	Spring Security + JWT (jjwt 0.12.3)	Token-based auth with ROLE_ADMIN / ROLE_STUDENT
+ORM	Spring Data JPA	Database access layer
+Validation	Spring Validation	@Valid / @NotBlank etc.
+Code Simplification	Lombok 1.18.46	@Data, @Builder, @Slf4j
+JSON Parsing	Gson 2.10	AI response parsing
+File Parsing — PDF	Apache PDFBox 3.0.1	Extracting text from PDF uploads
+File Parsing — DOC/DOCX	Apache POI 5.2.5 (poi-ooxml, poi-scratchpad)	Extracting text from Word documents
+Code Execution Engine	Judge0 API (optional)	Remote code execution via REST API
+Code Execution (local)	Local compiler/interpreter	Fallback when Judge0 is disabled
+Testing	Spring Boot Test + Spring Security Test	Unit/integration tests
+
+🗄️ Database Stack
+Category	Technology	Details
+Primary DB	MySQL (via mysql-connector-j)	Production database with InnoDB engine
+In-Memory DB	H2 (for testing/dev)	Runtime-scoped dependency
+Schema	UTF8MB4 + utf8mb4_unicode_ci	Full Unicode support
+Tables	8 tables	users, exams, questions, test_cases, coding_submissions, evaluation_results, exam_results, attendance
+Indexes	Strategic indexes on FK columns, is_published, starts_at/ends_at	Performance optimization
+Constraints	Foreign keys, unique constraints, ON DELETE CASCADE/RESTRICT	Data integrity
+
+🤖 AI Stack
+Category	Technology	Details
+AI Provider	Groq (primary)	Free-tier API at https://api.groq.com/openai/v1/chat/completions
+AI Model	Llama 3.3 70B (via Groq)	llama-3.3-70b-versatile
+Backup Provider	Ollama (local)	Local LLM inference via http://localhost:11434/api/generate
+API Protocol	OpenAI-compatible	Follows OpenAI chat completions format
+Integration Pattern	Direct HTTP calls via HttpURLConnection	No SDK — uses raw REST with JSON payloads
+Prompt Engineering	Custom PromptBuilder	Structured prompts for question generation & parsing
+AI Capabilities	• Single question generation• Multi-question parsing from uploaded files (PDF/DOCX/TXT)• Test case generation (5 per question)• Starter code & solution code generation
+	
+📦 Supporting Tools & Utilities
+Tool	Purpose
+Node.js (via generate-pdf.js)	Headless PDF generation using Edge/Chrome
+Maven Wrapper (mvnw)	Build backend without pre-installed Maven
+Vite	Dev server for frontend with HMR
+
+🔐 Authentication Flow
+JWT-based authentication with jwt.secret and jwt.expiration (24h)
+Roles: ADMIN (full access) and STUDENT (exam-taking)
+Protected routes via ProtectedRoute component on frontend
+JwtAuthenticationEntryPoint for unauthorized access handling
+
+📁 Supported File Uploads
+Users can upload files for AI-based question generation:
+
+PDF (via PDFBox)
+DOC / DOCX (via Apache POI)
+TXT / MD (plain text extraction)
+🚀 Deployment Configuration
+Environment variables for sensitive config (DB credentials, JWT secret, AI API key)
+Configurable via application.properties with :defaultValue fallback pattern
+File uploads stored in ./uploads/ directory (10MB max file / 50MB request)
+This is a full-stack, AI-powered coding examination platform built with modern Java + React technologies, supporting automatic question generation, code execution, and evaluation.
+
+
+Task Completed
+🧩 Technology Stack — Smart Coding Exam System
+Based on my complete analysis of the project files (pom.xml, package.json, application.properties, schema.sql, and source code), here is the full technology stack:
+
+===============================================================
+            SMART CODING EXAM SYSTEM
+          TEAM WORK DISTRIBUTION & CONTRIBUTION
+===============================================================
+
+Team Members
+------------
+1. Gopal Lad (Team Leader)
+2. Sumit
+3. Shrutika
+4. Tejal
+5. Swaraj
+
+===============================================================
+1. GOPAL LAD (TEAM LEADER)
+===============================================================
+
+ROLE
+-----
+• Team Leader
+• Backend Lead
+• AI Integration
+
+MY CONTRIBUTION
+---------------
+I worked as the Team Leader and Backend Lead for the Smart Coding Exam System.
+I planned the overall project architecture and coordinated the development team.
+I developed the authentication system using Spring Security and JWT.
+I implemented Login, Registration, Forgot Password, and Role-Based Authentication.
+I integrated AI features for automatic coding question generation and image-to-question extraction.
+I created secure backend REST APIs and managed database integration.
+I integrated the frontend with the backend and resolved major technical issues.
+I reviewed team members' code, fixed bugs, and managed the final integration.
+I guided the project development from planning to completion.
+
+RESPONSIBILITIES
+----------------
+• Project Planning
+• System Architecture
+• Backend Development
+• Authentication
+• AI Integration
+• API Development
+• Database Design
+• Security
+• Final Integration
+• Team Coordination
+
+FILES
+-----
+Backend
+- AuthApiController.java
+- AuthService.java
+- SecurityConfig.java
+- OtpService.java
+- QuestionAiController.java
+- CodeExecutionController.java
+- UserRepository.java
+- User.java
+
+Frontend
+- LoginPage.tsx
+- RegisterPage.tsx
+- ForgotPassword.tsx
+
+FEATURES
+--------
+• Login System
+• Registration
+• Email OTP
+• JWT Authentication
+• AI Question Generator
+• AI Image Extraction
+• Secure REST APIs
+
+PRESENTATION
+------------
+• Project Introduction
+• Architecture
+• Authentication
+• AI Integration
+• Database
+• Future Scope
+
+
+===============================================================
+2. SUMIT
+===============================================================
+
+ROLE
+-----
+• Backend Developer
+• Deployment Engineer
+
+MY CONTRIBUTION
+---------------
+I worked as a Backend Developer and Deployment Engineer.
+I developed backend APIs for exam management and coding functionality.
+I implemented code execution and evaluation modules.
+I managed MySQL database integration and backend configuration.
+I prepared the project for production deployment.
+I configured environment variables and deployment settings.
+I deployed the application on AWS.
+I tested backend services after deployment.
+I ensured the application was running successfully in production.
+
+RESPONSIBILITIES
+----------------
+• Backend APIs
+• Exam Module
+• Code Execution
+• Auto Evaluation
+• Database
+• Deployment
+• Production Setup
+
+FILES
+-----
+- AdminController.java
+- ExamController.java
+- ExamService.java
+- CodingEvaluationService.java
+- QuestionRepository.java
+- ExamRepository.java
+- application.properties
+- pom.xml
+- Dockerfile
+- docker-compose.yml
+
+FEATURES
+--------
+• Exam CRUD
+• Question CRUD
+• Code Execution
+• Auto Evaluation
+• Deployment
+• AWS Hosting
+
+PRESENTATION
+------------
+• Backend APIs
+• Database
+• Deployment
+• Production Environment
+
+
+===============================================================
+3. SHRUTIKA
+===============================================================
+
+ROLE
+-----
+• Frontend Developer
+• Student Module
+
+MY CONTRIBUTION
+---------------
+I worked as a Frontend Developer for the Student Module.
+I designed the student dashboard and exam interface.
+I developed the available exams page and exam instruction page.
+I implemented the coding exam page and timer interface.
+I created the result page and review page.
+I developed the leaderboard page.
+I connected frontend pages with backend APIs.
+I improved the responsive design and fixed UI issues.
+I helped provide a better user experience.
+
+RESPONSIBILITIES
+----------------
+• Student Dashboard
+• Available Exams
+• Exam Instructions
+• Exam Page
+• Result Page
+• Review Page
+• Leaderboard
+• Responsive UI
+
+FILES
+-----
+- StudentDashboard.tsx
+- AvailableExams.tsx
+- ExamInstructions.tsx
+- ExamPage.tsx
+- ResultPage.tsx
+- ReviewPage.tsx
+- Leaderboard.tsx
+
+FEATURES
+--------
+• Student Dashboard
+• Coding Exam Interface
+• Timer
+• Result Module
+• Leaderboard
+
+PRESENTATION
+------------
+• Student Workflow
+• Exam Process
+• Results
+• Student Interface
+
+
+===============================================================
+4. TEJAL
+===============================================================
+
+ROLE
+-----
+• Frontend Developer
+• Admin Module
+
+MY CONTRIBUTION
+---------------
+I worked as a Frontend Developer for the Admin Module.
+I designed the admin dashboard and management pages.
+I developed the exam management interface.
+I implemented question management pages.
+I created student management functionality.
+I developed activity log and report pages.
+I connected frontend pages with backend APIs.
+I improved the admin user interface.
+I fixed frontend bugs and enhanced responsiveness.
+
+RESPONSIBILITIES
+----------------
+• Admin Dashboard
+• Manage Exams
+• Create Exam
+• Add Question
+• Edit Question
+• Manage Students
+• Activity Logs
+• Reports
+
+FILES
+-----
+- AdminDashboard.tsx
+- ManageExams.tsx
+- CreateExam.tsx
+- AddQuestion.tsx
+- EditQuestion.tsx
+- ManageStudents.tsx
+- ActivityLogs.tsx
+- Reports.tsx
+
+FEATURES
+--------
+• Admin Dashboard
+• Exam Management
+• Student Management
+• Reports
+• Responsive Admin UI
+
+PRESENTATION
+------------
+• Admin Module
+• Exam Management
+• Reports
+
+
+===============================================================
+5. SWARAJ
+===============================================================
+
+ROLE
+-----
+• Frontend Support Developer
+
+MY CONTRIBUTION
+---------------
+I worked as a Frontend Support Developer.
+I developed reusable UI components used across the application.
+I created Profile, Settings, About, Help, and Contact pages.
+I implemented loading, error, and 404 pages.
+I worked on the Navbar, Sidebar, and Footer components.
+I improved responsive design for multiple screen sizes.
+I fixed frontend bugs and UI issues.
+I tested frontend pages before project delivery.
+I supported the frontend team during final integration.
+
+RESPONSIBILITIES
+----------------
+• Shared UI Components
+• Profile Page
+• Settings Page
+• About Page
+• Help Page
+• Contact Page
+• Loading Screen
+• Error Page
+• Frontend Testing
+• UI Improvements
+
+FILES
+-----
+- ProfilePage.tsx
+- SettingsPage.tsx
+- AboutPage.tsx
+- HelpPage.tsx
+- ContactPage.tsx
+- NotFound.tsx
+- Loading.tsx
+- ErrorPage.tsx
+- Navbar.tsx
+- Sidebar.tsx
+- Footer.tsx
+- ThemeToggle.tsx
+
+FEATURES
+--------
+• Common Components
+• Responsive Design
+• UI Improvements
+• Loading & Error Screens
+• Frontend Testing
+
+PRESENTATION
+------------
+• Shared Components
+• UI Improvements
+• Frontend Testing
+
+
+===============================================================
+PROJECT TECHNOLOGY
+===============================================================
+
+Frontend
+---------
+• React
+• TypeScript
+• Tailwind CSS
+• Monaco Editor
+
+Backend
+--------
+• Spring Boot
+• Spring Security
+• JWT Authentication
+• REST API
+• Maven
+
+Database
+--------
+• MySQL
+
+AI
+--
+• OpenAI API
+• AI Question Generation
+• AI Image to Coding Question
+
+Deployment
+----------
+• AWS
+• Docker
+• MySQL Server
+
+===============================================================

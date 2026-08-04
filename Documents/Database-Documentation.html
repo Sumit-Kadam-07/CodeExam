@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Smart Coding Exam System — Database Documentation</title>
+  <style>
+    @page { size: A4; margin: 18mm; }
+    body { font-family: Arial, sans-serif; color: #1f2937; font-size: 10.5pt; line-height: 1.45; }
+    h1 { color: #0f3d76; font-size: 24pt; margin: 0 0 4px; }
+    h2 { color: #0f3d76; font-size: 15pt; border-bottom: 1px solid #bfdbfe; padding-bottom: 4px; margin-top: 24px; }
+    h3 { color: #1d4ed8; font-size: 12pt; margin-bottom: 4px; }
+    .sub { color: #64748b; margin-top: 0; }
+    code, pre { font-family: Consolas, monospace; font-size: 9pt; }
+    pre { background: #f1f5f9; border-left: 4px solid #2563eb; padding: 10px; white-space: pre-wrap; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0 16px; }
+    th { background: #0f3d76; color: white; text-align: left; }
+    th, td { border: 1px solid #cbd5e1; padding: 7px; vertical-align: top; }
+    tr:nth-child(even) { background: #f8fafc; }
+    .diagram { background: #eff6ff; border: 1px solid #93c5fd; padding: 12px; text-align: center; font-family: Consolas, monospace; white-space: pre; }
+    .note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px; }
+    .footer { margin-top: 30px; color: #64748b; font-size: 9pt; }
+  </style>
+</head>
+<body>
+  <h1>Smart Coding Exam System</h1>
+  <p class="sub">Database documentation</p>
+
+  <h2>1. Overview</h2>
+  <p>The application uses a MySQL database named <code>smart_coding_exam</code>. It stores users, exams, coding questions, test cases, results, code submissions, and activity/audit events.</p>
+  <p>The backend connection is configured in <code>backend/src/main/resources/application.properties</code>. The default database host is <code>localhost:3306</code>. Connection values can be supplied through <code>MYSQL_URL</code>, <code>MYSQL_USER</code>, and <code>MYSQL_PASSWORD</code> environment variables.</p>
+
+  <h2>2. How the database is created</h2>
+  <ol>
+    <li>Create the MySQL database.</li>
+    <li>Start the Spring Boot backend.</li>
+    <li>Hibernate compares the Java entities with the schema and creates missing tables or compatible columns.</li>
+  </ol>
+  <pre>CREATE DATABASE IF NOT EXISTS smart_coding_exam
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;</pre>
+  <p>The backend setting <code>spring.jpa.hibernate.ddl-auto=update</code> keeps the schema aligned with the entity classes without deleting existing data.</p>
+  <div class="note"><strong>Important:</strong> <code>database/schema_mysql.sql</code> is a useful initial schema reference, but it is older than the current entity model. The active schema is maintained by Hibernate when the backend runs.</div>
+
+  <h2>3. Database relationships</h2>
+  <div class="diagram">users ──&lt; exams ──&lt; questions ──&lt; test_cases
+  │          │
+  │          └──&lt; exam_results ──&lt; coding_submissions
+  │                    │
+  └────────────────────┘
+                       │
+                 activity_logs</div>
+  <p>Each “one-to-many” relationship uses a foreign key. For example, a question belongs to one exam through <code>questions.exam_id</code>, while an exam may have many questions.</p>
+
+  <h2>4. Active application tables</h2>
+  <table>
+    <thead><tr><th>Table</th><th>Purpose</th><th>Main relationships</th></tr></thead>
+    <tbody>
+      <tr><td><code>users</code></td><td>Admin and student accounts, profile data, role, and BCrypt password hash.</td><td>Creates exams; owns results, submissions, and activity logs.</td></tr>
+      <tr><td><code>exams</code></td><td>Exam title, description, duration, marks, publish state, creator, and availability times.</td><td>Created by a user; contains questions and results.</td></tr>
+      <tr><td><code>questions</code></td><td>Coding problem statement, marks, difficulty, language, starter code, and execution limits.</td><td>Belongs to an exam; contains test cases.</td></tr>
+      <tr><td><code>test_cases</code></td><td>Expected input/output checks, sequence number, weight, and sample-test indicator.</td><td>Belongs to a question.</td></tr>
+      <tr><td><code>exam_results</code></td><td>One student’s overall exam attempt: scores, percentage, pass state, and timestamps.</td><td>Links a student and exam; contains code submissions.</td></tr>
+      <tr><td><code>coding_submissions</code></td><td>Submitted source code, language, compiler/runtime output, test-case counts, auto score, manual review, and status.</td><td>Links an exam result, student, exam, and question.</td></tr>
+      <tr><td><code>activity_logs</code></td><td>Audit/proctoring events, including login, tab switch, copy/paste attempt, start, and submission.</td><td>Links a student, exam, and optionally an exam result.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. Data flow</h2>
+  <ol>
+    <li>An admin creates an exam; a row is stored in <code>exams</code>.</li>
+    <li>The admin adds questions and test cases; they are stored in <code>questions</code> and <code>test_cases</code>.</li>
+    <li>A student starts an exam; the system creates or updates an <code>exam_results</code> record.</li>
+    <li>For each coding answer, the system stores a row in <code>coding_submissions</code>.</li>
+    <li>Code evaluation updates the submission with output, errors, passed tests, timing, and score.</li>
+    <li>Final marks and percentage are saved in <code>exam_results</code>.</li>
+    <li>Important student actions are recorded in <code>activity_logs</code>.</li>
+  </ol>
+
+  <h2>6. Integrity and security</h2>
+  <ul>
+    <li>Primary keys use auto-increment numeric IDs.</li>
+    <li>Foreign keys enforce links between parent and child records.</li>
+    <li>Several child records cascade when their parent exam/question/result is deleted.</li>
+    <li>Unique constraints prevent duplicate usernames and duplicate result attempts for the same student, exam, and attempt number.</li>
+    <li>Passwords are stored as BCrypt hashes, never plain text.</li>
+    <li>Indexes support common lookups such as published exams, exam questions, student submissions, and student results.</li>
+  </ul>
+
+  <h2>7. Older reference-only tables</h2>
+  <p>The SQL reference script also defines <code>attendance</code> and <code>evaluation_results</code>. The present Java entity model does not use these tables. Current code evaluation details are stored directly in <code>coding_submissions</code>.</p>
+
+  <h2>8. Project file structure</h2>
+  <p>The project is split into a Java/Spring Boot backend, a React/Vite frontend, and database scripts.</p>
+  <pre>CodeExam/
+├── backend/                         Spring Boot API
+│   ├── pom.xml                       Maven dependencies and build settings
+│   └── src/
+│       ├── main/java/com/example/exam/
+│       │   ├── OnlineExamApplication.java  Application entry point
+│       │   ├── api/                  REST API controllers
+│       │   ├── service/              Business logic
+│       │   ├── repository/           Database access interfaces
+│       │   ├── model/                JPA database entities
+│       │   ├── dto/                  Request/response data objects
+│       │   ├── mapper/               Entity-to-DTO conversion
+│       │   ├── config/               Security, JWT, and app configuration
+│       │   ├── execution/            Code execution providers
+│       │   ├── ai/                   AI question-generation support
+│       │   ├── controller/           Code-execution endpoints
+│       │   └── util/                 Shared parsing and security helpers
+│       ├── main/resources/
+│       │   └── application.properties  Server, DB, JWT, AI settings
+│       └── test/                     Backend tests
+├── frontend/
+│   ├── package.json                  Workspace scripts
+│   └── frontend/                     React/Vite web application
+│       ├── src/
+│       │   ├── App.tsx               Client-side routes
+│       │   ├── pages/                Admin, student, auth, home pages
+│       │   ├── components/           Reusable UI and question components
+│       │   ├── services/             HTTP API calls
+│       │   ├── context/              Authentication state
+│       │   ├── lib/                  Axios client and interceptors
+│       │   ├── hooks/, types/, utils/ Shared frontend code
+│       │   └── main.tsx              React bootstrap file
+│       ├── public/                   Static browser assets
+│       ├── vite.config.ts            Vite server and API proxy settings
+│       └── package.json              Frontend dependencies/scripts
+├── database/
+│   ├── schema_mysql.sql              MySQL schema reference
+│   ├── schema.sql                    Alternative schema reference
+│   ├── clean_data.sql                Data cleanup script
+│   └── README.md                     Database setup notes
+├── start-system.bat                  Starts backend and frontend locally
+├── README.md                         Project setup and usage guide
+└── project-documentation.html        General project documentation source</pre>
+
+  <h3>What each backend layer does</h3>
+  <table>
+    <thead><tr><th>Folder</th><th>Responsibility</th></tr></thead>
+    <tbody>
+      <tr><td><code>api</code></td><td>Receives HTTP requests such as login, create exam, add question, results, and student actions.</td></tr>
+      <tr><td><code>service</code></td><td>Applies business rules, coordinates database operations, evaluation, authentication, and leaderboards.</td></tr>
+      <tr><td><code>repository</code></td><td>Uses Spring Data JPA to read and write database entities.</td></tr>
+      <tr><td><code>model</code></td><td>Defines Java classes mapped to database tables.</td></tr>
+      <tr><td><code>dto</code> and <code>mapper</code></td><td>Defines safe API payloads and converts database models into those payloads.</td></tr>
+      <tr><td><code>config</code></td><td>Configures JWT authentication, access control, CORS, and initial admin setup.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>What each frontend area does</h3>
+  <table>
+    <thead><tr><th>Folder</th><th>Responsibility</th></tr></thead>
+    <tbody>
+      <tr><td><code>pages</code></td><td>Complete screens for admin management, student exams, login, results, and profiles.</td></tr>
+      <tr><td><code>components</code></td><td>Reusable visual blocks such as the navigation bar, tables, forms, editor, and modals.</td></tr>
+      <tr><td><code>services</code></td><td>Frontend functions that call backend APIs.</td></tr>
+      <tr><td><code>context</code></td><td>Stores current user and authentication state across the app.</td></tr>
+      <tr><td><code>lib</code></td><td>Configures Axios, API base URL, JWT request headers, and login redirect behavior.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="footer">Generated for the Smart Coding Exam System.</p>
+</body>
+</html>

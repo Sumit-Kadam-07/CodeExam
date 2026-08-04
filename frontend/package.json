@@ -1,0 +1,17 @@
+{
+  "name": "frontend-workspace",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "typecheck": "npm run typecheck:libs && npm --prefix frontend run typecheck --if-present",
+    "typecheck:libs": "tsc -p tsconfig.json --noEmit",
+    "install:all": "npm --prefix frontend install"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.6",
+    "typescript": "~5.9.3"
+  }
+}

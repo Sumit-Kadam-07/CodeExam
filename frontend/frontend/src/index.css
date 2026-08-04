@@ -1,0 +1,9 @@
+/* Bootstrap handles all styling via CDN in index.html */
+body {
+  background-color: #f8f9fa;
+}
+
+.border-dashed {
+  border-style: dashed !important;
+  border-width: 2px !important;
+}

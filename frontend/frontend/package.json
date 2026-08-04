@@ -1,0 +1,29 @@
+{
+  "name": "smart-exam",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "npx vite --host 0.0.0.0",
+    "build": "npx vite build",
+    "serve": "npx vite preview --host 0.0.0.0",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.3",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@vitejs/plugin-react": "^5.0.4",
+    "typescript": "^7.0.2",
+    "vite": "^7.3.2"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "axios": "^1.7.7",
+    "chart.js": "^4.5.1",
+    "react": "19.1.0",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "19.1.0",
+    "wouter": "^3.3.5"
+  }
+}
