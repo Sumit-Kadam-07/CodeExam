@@ -41,7 +41,7 @@ public class CodingSubmission {
     private Question question;
 
     @Lob
-    @Column(nullable = false)
+    @Column(name = "source_code", columnDefinition = "LONGTEXT")
     private String sourceCode;
 
     @Column(nullable = false)

@@ -16,16 +16,23 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper;
+
+    public JwtAuthenticationEntryPoint(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
 
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
-                         AuthenticationException authException) throws IOException {
+                         AuthenticationException authException)
+            throws IOException {
+
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
-        ApiResponse<Void> errorResponse = ApiResponse.error("Unauthorized: " + authException.getMessage());
+        ApiResponse<Void> errorResponse =
+                ApiResponse.error("Unauthorized: " + authException.getMessage());
 
         objectMapper.writeValue(response.getOutputStream(), errorResponse);
     }
