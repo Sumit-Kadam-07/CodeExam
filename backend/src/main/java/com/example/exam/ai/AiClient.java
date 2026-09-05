@@ -109,6 +109,13 @@ public class AiClient {
             msg.addProperty("content", prompt);
             messages.add(msg);
             body.add("messages", messages);
+            
+           JsonObject responseFormat = new JsonObject();
+responseFormat.addProperty("type", "json_object");
+body.add("response_format", responseFormat);
+
+body.addProperty("reasoning_format", "hidden");
+
 
             try (OutputStream os = conn.getOutputStream()) {
                 os.write(gson.toJson(body).getBytes(StandardCharsets.UTF_8));
