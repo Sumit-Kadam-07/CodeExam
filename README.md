@@ -66,3 +66,444 @@ The application is built using a modern **React + TypeScript frontend** and a se
 ✔️ AWS EC2 Deployment  
 
 ---
+
+# 📸 Screenshots
+
+## 🏠 Landing Page
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>CodeExam Landing Page</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/home.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🔐 Login & Registration
+
+<table width="100%">
+<tr>
+
+<td align="center">
+<b>Login</b>
+</td>
+
+<td align="center">
+<b>Registration</b>
+</td>
+
+</tr>
+
+<tr>
+
+<td align="center">
+
+<img src="./Documents/screenshots/login.png" width="95%">
+
+</td>
+
+<td align="center">
+
+<img src="./Documents/screenshots/register.png" width="95%">
+
+</td>
+
+</tr>
+</table>
+
+---
+
+## 👨‍💼 Admin Dashboard
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Admin Dashboard</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/admin-dashboard.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 📝 Create & Manage Exams
+
+<table width="100%">
+<tr>
+
+<td align="center">
+<b>Create New Exam</b>
+</td>
+
+<td align="center">
+<b>Manage Exams</b>
+</td>
+
+</tr>
+
+<tr>
+
+<td align="center">
+
+<img src="./Documents/screenshots/create-exam.png" width="95%">
+
+</td>
+
+<td align="center">
+
+<img src="./Documents/screenshots/manage-exams.png" width="95%">
+
+</td>
+
+</tr>
+</table>
+
+---
+
+## 🤖 AI Question Generator
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>AI Question Generator</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/ai-question-generator.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## ✍️ Manual Question Creation
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Manual Add Question</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/manual-add-question.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 📂 Upload Question File
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Upload Question File</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/upload-question-file.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 📚 Manage Questions
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Manage Questions</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/manage-questions.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 👨‍🎓 Manage Students
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Manage Students</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/manage-students.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🏆 Global Leaderboard
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Global Leaderboard</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/global-leaderboard.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 👨‍🎓 Student Dashboard
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Student Dashboard</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/student-dashboard.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## 💻 Online Coding Exam
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Coding Exam Interface</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/coding-exam.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+## ✅ Exam Submitted
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<b>Exam Submitted Successfully</b>
+
+</td>
+</tr>
+
+<tr>
+<td align="center">
+
+<img src="./Documents/screenshots/exam-submitted.png" width="90%">
+
+</td>
+</tr>
+</table>
+
+---
+
+# 👨‍💼 Admin Features
+
+The Admin module provides complete control over the examination system.
+
+### 🔐 Authentication
+
+- Secure Admin Login
+- JWT Based Authentication
+- Role Based Authorization
+
+### 📊 Dashboard
+
+- Total Exams
+- Total Students
+- Total Questions
+- Exam Statistics
+- Quick Management Actions
+
+### 📝 Exam Management
+
+- Create Exam
+- Edit Exam
+- Delete Exam
+- Publish Exam
+- Unpublish Exam
+- Configure Exam Duration
+- Configure Total Marks
+
+### 📚 Question Management
+
+- Add Questions Manually
+- Edit Questions
+- Delete Questions
+- View Questions
+- Manage Test Cases
+- Assign Questions to Exams
+
+### 🤖 AI Question Generation
+
+- Generate Questions using AI
+- Generate Multiple Questions
+- Select Programming Language
+- Select Difficulty
+- Configure Marks
+- Generate Questions from Topic
+- Generate Questions from Uploaded Files
+
+### 👨‍🎓 Student Management
+
+- View Students
+- Manage Students
+- Monitor Student Participation
+- View Student Performance
+
+### 🏆 Results & Leaderboard
+
+- View Exam Results
+- Monitor Student Scores
+- Global Leaderboard
+
+---
+
+# 👨‍🎓 Student Features
+
+The Student module provides a complete online coding examination experience.
+
+### 🔐 Authentication
+
+- Student Registration
+- Student Login
+- Secure Authentication
+
+### 📊 Student Dashboard
+
+- View Available Exams
+- View Completed Exams
+- View Results
+- View Performance
+- View Leaderboard
+
+### 💻 Coding Exam
+
+- Start Exam
+- Live Exam Timer
+- Problem Statement
+- Monaco Code Editor
+- Write Code
+- Run Code
+- Compile Code
+- Reset Code
+- Execute Test Cases
+- Navigate Between Questions
+- Question Palette
+- Submit Answers
+
+### 📊 Results
+
+- Exam Submission
+- Score Calculation
+- Result Display
+- Performance Tracking
+- Leaderboard Ranking
+
+---
+
+# 🤖 AI Question Generator
+
+CodeExam includes an AI-powered question generation module that helps administrators create programming questions automatically.
+
+## Generate Questions From Topic
+
+The administrator can provide:
+
+```text
+Topic:
+Java Arrays
+
+Programming Language:
+Java
+
+Difficulty:
+Medium
+
+Marks:
+10
+
+Number of Questions:
+5
