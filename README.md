@@ -624,7 +624,7 @@ The global leaderboard displays student rankings based on their examination perf
 
 Students can compare their scores and rankings with other participants.
 
-![Global Leaderboard](./Documents/screenshots/12-global-leaderboard.png)
+![Global Leaderboard](./Documents/screenshots/global-leaderboard.png)
 
 ## Exam Results
 
@@ -778,3 +778,523 @@ Follow the steps below to run CodeExam locally.
 git clone https://github.com/Sumit-Kadam-07/CodeExam.git
 cd CodeExam
 ```
+
+## 2. Configure the Database
+
+Make sure MySQL is installed and running.
+
+Create a database for the project:
+
+```bash
+CREATE DATABASE codeexam;
+```
+
+Update the database configuration in the Spring Boot application with your MySQL username, password, and database name.
+
+Example:
+
+```bash
+spring.datasource.url=jdbc:mysql://localhost:3306/codeexam
+spring.datasource.username=root
+spring.datasource.password=YOUR_PASSWORD
+```
+
+## 3. Run the Backend
+
+Navigate to the backend directory:
+
+```bash
+cd backend
+```
+
+Run the Spring Boot application using Maven:
+
+```bash
+mvn spring-boot:run
+```
+
+The backend will start and provide the REST APIs required by the frontend.
+
+## 4. Run the Frontend
+
+Open another terminal and navigate to the frontend directory:
+
+```bash
+cd frontend/frontend
+```
+
+Install the required dependencies:
+
+```bash
+npm install
+```
+
+Start the Vite development server:
+
+```bash
+npm run dev
+```
+
+Open the URL displayed by Vite in your browser.
+
+## 5. Using Docker
+
+CodeExam also includes Docker configuration for running the application using containers.
+
+From the project root directory:
+
+```bash
+docker-compose up --build
+```
+
+To run the containers in the background:
+
+```bash
+docker-compose up -d --build
+```
+
+Check running containers using:
+
+```bash
+docker ps
+```
+
+To stop the application:
+
+```bash
+docker-compose down
+```
+
+## 6. Build the Frontend
+
+To create a production build:
+
+```bash
+cd frontend/frontend
+npm run build
+```
+
+The production files will be generated in the dist directory.
+
+## 7. Build the Backend
+
+From the backend directory:
+
+```bash
+mvn clean package
+
+```
+The generated JAR file will be available inside:
+
+```bash
+backend/target/
+```
+
+## 8. Access the Application
+
+Once the frontend and backend are running, open the frontend URL in your browser.
+
+You can then:
+
+Register as a student.
+Login to the application.
+Browse available examinations.
+Attempt coding questions.
+Submit the examination.
+View results and leaderboard rankings.
+
+Administrators can login to the admin dashboard to create examinations, manage questions, manage students, and generate questions using AI.
+
+# 🔐 Authentication & Security
+
+CodeExam includes a secure authentication and authorization system to protect user accounts and application resources.
+
+## User Authentication
+
+Users can register and login to the application using their credentials.
+
+The system provides:
+
+- User registration
+- User login
+- Secure password handling
+- JWT-based authentication
+- Authenticated API requests
+- Logout functionality
+
+## Role-Based Authorization
+
+CodeExam supports different user roles with access to role-specific features.
+
+### 👨‍💼 Admin
+
+Administrators can:
+
+- Create and manage examinations
+- Add and manage questions
+- Generate questions using AI
+- Upload files for question generation
+- Manage students
+- View examination data
+- Monitor results and leaderboard
+
+### 👨‍🎓 Student
+
+Students can:
+
+- Access available examinations
+- Attempt coding questions
+- Submit solutions
+- View examination results
+- View leaderboard rankings
+
+## JWT Authentication
+
+The backend uses **JSON Web Tokens (JWT)** for authentication.
+
+After successful login, the authenticated user receives a token that is used to authorize protected API requests.
+
+```text
+User Login
+    ↓
+Authentication
+    ↓
+JWT Token
+    ↓
+Authenticated Requests
+    ↓
+Role-Based Authorization
+    ↓
+Protected Resources
+```
+
+# 🐳 Docker Deployment
+
+CodeExam can be deployed using Docker to simplify application setup and deployment.
+
+The project includes a `docker-compose.yml` file that can be used to run the application services together.
+
+## Docker Compose
+
+From the project root directory, run:
+
+```bash
+docker-compose up --build
+```
+To run the application in detached mode:
+
+```bash
+docker-compose up -d --build
+```
+Check Running Containers
+
+Use the following command to verify that the containers are running:
+
+```bash
+docker ps
+```
+View Container Logs
+
+To view application logs:
+
+```bash
+docker-compose logs
+```
+
+To follow logs continuously:
+
+```bash
+docker-compose logs -f
+```
+Stop the Application
+
+To stop and remove the running containers:
+
+```bash
+docker-compose down
+```
+Rebuild Containers
+
+If changes are made to the application, rebuild the Docker images using:
+
+```bash
+docker-compose up -d --build
+```
+Docker Architecture
+```text
+                ┌─────────────────────┐
+                │       Browser       │
+                └──────────┬──────────┘
+                           │
+                           ▼
+                ┌─────────────────────┐
+                │ Frontend Container  │
+                │   React + Vite      │
+                └──────────┬──────────┘
+                           │
+                           ▼
+                ┌─────────────────────┐
+                │ Backend Container   │
+                │ Spring Boot + Java  │
+                └──────────┬──────────┘
+                           │
+                           ▼
+                ┌─────────────────────┐
+                │ Database Container  │
+                │       MySQL         │
+                └─────────────────────┘
+```
+## 18. ⚙️ Configuration
+
+Before running CodeExam, configure the database and application settings.
+
+### Database Configuration
+
+CodeExam uses MySQL as the primary database.
+
+Create the database:
+
+```sql
+CREATE DATABASE codeexam;
+```
+
+Configure the database connection in the Spring Boot `application.properties` file:
+
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/codeexam
+spring.datasource.username=root
+spring.datasource.password=YOUR_PASSWORD
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+```
+
+Replace `YOUR_PASSWORD` with your MySQL password.
+
+### JWT Configuration
+
+The application uses JWT for authentication and authorization.
+
+Configure the JWT secret in the backend configuration:
+
+```properties
+jwt.secret=YOUR_SECRET_KEY
+```
+
+Use a strong secret key for production deployments.
+
+### Frontend API Configuration
+
+The React frontend communicates with the Spring Boot backend through REST APIs.
+
+Configure the backend API URL according to your environment:
+
+```env
+VITE_API_URL=http://localhost:8080
+```
+
+For production deployment, replace it with the URL of the deployed backend:
+
+```env
+VITE_API_URL=https://your-backend-domain.com
+```
+
+### Environment Variables
+
+Sensitive information should not be hard-coded in the source code.
+
+Example:
+
+```env
+DB_USERNAME=root
+DB_PASSWORD=YOUR_PASSWORD
+JWT_SECRET=YOUR_SECRET_KEY
+VITE_API_URL=http://localhost:8080
+```
+
+> **Important:** Never commit passwords, API keys, JWT secrets, or other sensitive credentials to GitHub.
+
+### Configuration Checklist
+
+Before starting the application, make sure:
+
+```text
+✓ MySQL is installed and running
+✓ codeexam database is created
+✓ Database username and password are configured
+✓ JWT secret is configured
+✓ Backend API URL is configured
+✓ Required environment variables are available
+✓ Frontend and backend dependencies are installed
+```
+
+## 19. 🧪 Testing
+
+CodeExam can be tested at both the backend and frontend levels to verify that the application works correctly.
+
+### Backend Testing
+
+Navigate to the backend directory:
+
+```bash
+cd backend
+```
+
+Run the Spring Boot tests using Maven:
+
+```bash
+mvn test
+```
+
+To build the backend and run the available tests:
+
+```bash
+mvn clean test
+```
+
+### Frontend Testing
+
+Navigate to the frontend directory:
+
+```bash
+cd frontend/frontend
+```
+
+Install dependencies if required:
+
+```bash
+npm install
+```
+
+Build the frontend application:
+
+```bash
+npm run build
+```
+
+The build command verifies that the React and TypeScript source code can be compiled successfully.
+
+### Manual Testing
+
+The following major modules can be tested manually:
+
+```text
+Authentication
+    ↓
+Registration & Login
+    ↓
+Admin Dashboard
+    ↓
+Create Examination
+    ↓
+Add / Generate Questions
+    ↓
+Manage Students
+    ↓
+Student Dashboard
+    ↓
+Attempt Coding Exam
+    ↓
+Submit Examination
+    ↓
+View Results
+    ↓
+Leaderboard
+```
+
+### Functional Testing Checklist
+
+```text
+✓ User registration
+✓ User login
+✓ JWT authentication
+✓ Admin dashboard
+✓ Create examination
+✓ Edit and manage examinations
+✓ Add questions manually
+✓ Generate questions using AI
+✓ Upload files for AI question generation
+✓ Manage questions
+✓ Manage students
+✓ Student dashboard
+✓ Coding exam
+✓ Code execution and submission
+✓ Exam timer
+✓ Exam submission
+✓ Result calculation
+✓ Leaderboard
+```
+
+### Production Build Verification
+
+Before deployment, verify that both applications build successfully:
+
+```bash
+# Backend
+cd backend
+mvn clean package
+```
+
+```bash
+# Frontend
+cd frontend/frontend
+npm run build
+```
+
+A successful build indicates that the application is ready for deployment.
+
+## 20. 📌 Future Enhancements
+
+The CodeExam platform can be further enhanced with additional features and improvements.
+
+### Planned Improvements
+
+- 🤖 Advanced AI-based question generation
+- 📊 Detailed student performance analytics
+- 📈 Admin analytics dashboard
+- 🔔 Email and notification system
+- 🏅 Advanced ranking and achievement system
+- 📚 Question bank with category and topic filtering
+- 🔄 Randomized questions for each examination
+- 🌐 Support for additional programming languages
+- ☁️ Cloud-based deployment and scalability improvements
+- 📱 Improved responsive design for mobile devices
+- 🔒 Additional security and authentication improvements
+- ⚡ Performance optimization for large-scale examinations
+
+### Long-Term Goals
+
+```text
+AI-Powered Question Generation
+            ↓
+Large Question Bank
+            ↓
+Automated Examination Creation
+            ↓
+Online Coding Assessment
+            ↓
+Automated Evaluation
+            ↓
+Performance Analytics
+            ↓
+Personalized Learning Insights
+```
+
+The goal is to evolve CodeExam into a complete and scalable platform for conducting programming and technical assessments.
+
+## 21. 📄 License
+
+This project is developed for educational and demonstration purposes.
+
+The source code is available on GitHub for learning, development, and reference.
+
+### 👨‍💻 Developer
+
+**Sumit Kadam**
+
+GitHub Repository:
+
+---
+
+⭐ If you find this project useful, consider giving the repository a star!
