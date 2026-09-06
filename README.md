@@ -25,6 +25,12 @@
 </p>
 
 ---
+
+## 🌐 Live Preview
+
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-CodeExam-success?style=for-the-badge)](http://13.60.52.103)
+
+
 ## 📖 About The Project
 
 **CodeExam** is a Smart Coding Exam System designed to provide a complete online platform for conducting programming examinations.
