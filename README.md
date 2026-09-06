@@ -507,3 +507,274 @@ Marks:
 
 Number of Questions:
 5
+```
+
+# Generate 10 Java programming questions.
+
+Difficulty: Medium
+Marks: 10
+
+Each question should contain:
+
+- Problem Statement
+- Input
+- Output
+- Constraints
+- Sample Input
+- Sample Output
+- Test Cases
+
+# AI Question Processing
+
+```text
+AI Request
+    ↓
+Generate Questions
+    ↓
+Receive Response
+    ↓
+Parse JSON
+    ↓
+Validate Data
+    ↓
+Create Questions
+    ↓
+Save to Database
+    ↓
+Add to Selected Exam
+```
+---
+
+# 📂 AI File Upload Question Generation
+
+Administrators can upload programming-related documents and generate questions automatically.
+
+### Supported File Formats
+
+```text
+PDF
+DOC
+DOCX
+TXT
+MD
+```
+# Process 
+```text
+AI Request
+    ↓
+Generate Questions
+    ↓
+Receive Response
+    ↓
+Parse JSON
+    ↓
+Validate Data
+    ↓
+Create Questions
+    ↓
+Save to Database
+    ↓
+Add to Selected Exam
+```
+# 📝 Question Management
+
+CodeExam provides administrators with complete control over the questions used in coding examinations.
+
+## Add Questions Manually
+
+Administrators can create programming questions manually by providing:
+
+```text
+Question Title
+Question Description
+Programming Language
+Difficulty Level
+Marks
+Input Format
+Output Format
+Sample Input
+Sample Output
+Test Cases
+```
+# 👨‍🎓 Student Management
+
+CodeExam provides administrators with a dedicated student management module to manage registered students and monitor their participation in examinations.
+
+## Manage Students
+
+Administrators can:
+
+- View all registered students
+- View student details
+- Monitor student participation
+- Manage student accounts
+- Track examination activity
+
+### Student Management Interface
+
+![Manage Students](./Documents/screenshots/manage-students.png)
+
+# 🏆 Leaderboard & Results
+
+CodeExam provides a leaderboard and result system to evaluate student performance in coding examinations.
+
+## Global Leaderboard
+
+The global leaderboard displays student rankings based on their examination performance.
+
+Students can compare their scores and rankings with other participants.
+
+![Global Leaderboard](./Documents/screenshots/12-global-leaderboard.png)
+
+## Exam Results
+
+After submitting an examination, students can view their result and performance details.
+
+The result system provides information such as:
+
+- Total marks
+- Obtained marks
+- Questions attempted
+- Correct answers
+- Incorrect answers
+- Final score
+- Performance summary
+
+![Exam Submitted](./Documents/screenshots/exam-submitted.png)
+
+# 💻 Student Dashboard & Coding Exam
+
+Students get a dedicated dashboard where they can access available examinations and participate in coding assessments.
+
+## Student Dashboard
+
+The student dashboard provides access to:
+
+- Available examinations
+- Upcoming examinations
+- Completed examinations
+- Examination results
+- Leaderboard
+- Performance information
+
+![Student Dashboard](./Documents/screenshots/student-dashboard.png)
+
+## Coding Exam Interface
+
+The coding exam interface provides an interactive environment where students can solve programming questions.
+
+Students can:
+
+- Read the programming problem
+- Write code directly in the browser
+- Select the required programming language
+- Execute and test their solution
+- Submit their answer
+- Navigate between questions
+- Track the examination timer
+
+CodeExam uses the **Monaco Editor** to provide a modern code-editing experience.
+
+![Coding Exam](./Documents/screenshots/coding-exam.png)
+
+## Exam Submission
+
+After completing the examination, students can submit their answers and view the submission status.
+
+![Exam Submitted](./Documents/screenshots/exam-submitted.png)
+
+# 🛠️ Tech Stack
+
+CodeExam is built using modern web technologies with a React-based frontend and Spring Boot backend.
+
+## Frontend
+
+- **React 19**
+- **TypeScript**
+- **Vite**
+- **React Router / Wouter**
+- **Axios**
+- **Monaco Editor**
+- **Chart.js**
+- **HTML5**
+- **CSS3**
+
+## Backend
+
+- **Java 17**
+- **Spring Boot 3.2**
+- **Spring Web**
+- **Spring Data JPA**
+- **Spring Security**
+- **JWT Authentication**
+- **Hibernate**
+
+## Database
+
+- **MySQL**
+- **H2 Database** for development/testing
+
+## Additional Technologies
+
+- **Maven** – Backend dependency management
+- **npm** – Frontend package management
+- **Docker** – Containerization
+- **Apache PDFBox** – PDF processing
+- **Apache POI** – Document processing
+- **Gson** – JSON processing
+- **Git & GitHub** – Version control
+
+# 📁 Project Structure
+
+```text
+CodeExam/
+│
+├── backend/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── ...
+│   │   │   └── resources/
+│   │   └── test/
+│   ├── pom.xml
+│   └── ...
+│
+├── frontend/
+│   └── frontend/
+│       ├── src/
+│       │   ├── components/
+│       │   ├── pages/
+│       │   ├── services/
+│       │   ├── types/
+│       │   └── ...
+│       ├── package.json
+│       ├── vite.config.ts
+│       └── ...
+│
+├── database/
+│   └── ...
+│
+├── Documents/
+│   └── screenshots/
+│       ├── 01-home.png
+│       ├── 02-login.png
+│       ├── 03-register.png
+│       ├── 04-admin-dashboard.png
+│       └── ...
+│
+├── docker-compose.yml
+├── start-system.bat
+├── README.md
+└── TODO.md
+```
+
+# 🚀 How to Run the Project
+
+Follow the steps below to run CodeExam locally.
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/Sumit-Kadam-07/CodeExam.git
+cd CodeExam
+```
